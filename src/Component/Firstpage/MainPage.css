@@ -1,0 +1,14 @@
+.main {
+    display: flex;
+     /* flex-direction: column; */
+    align-items: center; 
+    width: 100%;
+    overflow-x: hidden;
+    height: auto;
+  }
+
+@media (max-width:768px) {
+    .solution-container{
+        margin-top: 290px;
+    }
+}

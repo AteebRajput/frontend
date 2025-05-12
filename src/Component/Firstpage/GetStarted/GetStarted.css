@@ -1,0 +1,124 @@
+
+  
+  .get-started {
+    padding: 1rem 0rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    width: 100vw;
+  }
+  
+  .get-started .title {
+    font-size: 3.5rem;
+    gap: 510px;
+    color: #5fc563;
+    font-weight: 600;
+    margin-bottom: 10px;
+    gap: 10px;
+    display: flex;
+    letter-spacing: 2px;
+    flex-wrap: wrap;
+    font-family: "Coming Soon", cursive;
+    text-transform: uppercase;
+  }
+
+  .get-started .title span{
+    margin-left: 5px;
+    color: gray;
+  }
+  
+  .get-started .description {
+    max-width: 70vw;
+    margin: 0 auto 2rem;
+    font-size: 1.2rem;
+    color: #595757;
+    font-weight: 700;
+  }
+  
+  .get-started .options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 0 1rem;
+    width: 70vw;
+  }
+  
+  .get-started .option {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    font-size: 1.1rem;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .option h2 {
+    color: #5cb85c;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .option p {
+    color: #555;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .get-started .option .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+   .get-started .option .buttons .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    
+    background-color: white;
+    color: #74ab4e;
+    border: 1px solid #74ab4e;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .get-started .option .buttons .btn.secondary {
+    background-color: #fff;
+    color: #5cb85c;
+    border: 1px solid #5cb85c;
+  }
+  
+  .get-started .option .buttons .btn:hover {
+    
+    background-color: #74ab4e;
+  color: white;
+  }
+  
+  .get-started .option .buttons .btn.secondary:hover {
+    background-color: #74ab4e;
+  color: white;
+  }
+  
+  @media (max-width: 768px) {
+    .get-started .description {
+      font-size: 0.9rem;
+    }
+  
+    .get-started .option h2 {
+      font-size: 1.25rem;
+    }
+  
+    .get-started .btn {
+      font-size: 0.9rem;
+    }
+  }
+  

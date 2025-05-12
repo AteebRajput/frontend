@@ -1,0 +1,271 @@
+/* Container and Title Styling */
+.solution-section {
+  font-family: "Arial", sans-serif;
+  color: #333;
+  text-align: center;
+  padding-top: 40px;
+  width: 100vw;
+  font-family: "Nunito Sans", sans-serif;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.solution-title span {
+  color: gray;
+  /* font-size: 20px; */
+}
+.solution-title {
+  font-size: 3.5rem;
+
+  color: #5fc563;
+  font-weight: 600;
+  margin-bottom: 10px;
+  gap: 10px;
+  display: flex;
+  letter-spacing: 2px;
+  flex-wrap: wrap;
+  /* font-family: "Alegreya", serif; */
+  font-family: "Coming Soon", cursive;
+  text-transform: uppercase;
+}
+
+.solution-description {
+  font-size: 1.6rem;
+  width: 85vw;
+  line-height: 1.5;
+  font-weight: 500;
+  color: grey;
+  margin-bottom: 30px;
+  font-style: oblique;
+  /* background-color: #ebe6e6; */
+}
+
+.solution-content {
+  display: flex; /* Flex layout for equal spacing */
+  justify-content: space-between; /* Space between the two containers */
+  align-items: flex-start; /* Align items to the top */
+  gap: 20px; /* Adds space between the two containers */
+  width: 85%; /* Ensure the container takes up the full width */
+  padding: 0px; /* Adds inner spacing */
+  box-sizing: border-box;
+}
+
+.left-container {
+  flex: 1; /* Ensures equal width for both containers */
+  padding: 0px; /* Inner padding for better spacing */
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  */
+  /* background-color: aquamarine; */
+  justify-content: center; /* Centers content inside */
+  align-items: center;
+  /* Optional: A light greenish background */
+}
+
+.right-container {
+  flex: 1; /* Ensures equal width for both containers */
+  padding: 0px; /* Inner padding for better spacing */
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  */
+  background-color: blueviolet; /* Light background color for distinction */
+  display: flex;
+  flex-direction: column; /* Stacks content vertically */
+  justify-content: center; /* Evenly spaces text and buttons */
+  background-color: #ffffff; /* Optional: White background for distinction */
+}
+
+.venn-diagram {
+  position: relative;
+  width: 600px; /* Adjusted width */
+  height: 300px; /* Adjusted height */
+}
+
+.circle {
+  position: absolute;
+  width: 280px; /* Increased size */
+  height: 280px; /* Increased size */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px; /* Increased padding */
+  color: white;
+}
+
+.circle1 {
+  background-color: #75ab4ea3; /* Light Green */
+  left: 80px; /* Adjusted position */
+  text-align: left;
+  top: 0px; /* Adjusted position */
+}
+
+.circle2 {
+  background-color: rgba(192, 192, 192, 0.8); /* Gray */
+  right: 60px; /* Adjusted position */
+  top: 0px; /* Adjusted position */
+  text-align: right;
+}
+
+.text {
+  font-size: 20px; /* Increased text size */
+  line-height: 1.1; /* Adjusted spacing */
+}
+
+.circle1 .text {
+  text-align: left;
+  padding-right: 90px;
+}
+.circle2 .text {
+  text-align: left;
+  padding-left: 130px;
+}
+.overlap {
+  position: absolute;
+  width: 80px; /* Increased size */
+  height: 80px; /* Increased size */
+  border-radius: 50%;
+  background-color: rgba(143, 188, 143, 1);
+  top: 90px; /* Adjusted position */
+  left: 270px; /* Adjusted position */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlap img {
+  width: 60px; /* Increased size */
+  height: 60px; /* Increased size */
+}
+
+/* Solution Details Styling */
+.solution-details {
+  max-width: 600px;
+  margin: 20px auto;
+  text-align: left;
+  line-height: 1.8;
+}
+
+.solution-details p {
+  margin-bottom: 15px;
+}
+.solution-details .second-para {
+  font-weight: 800;
+  color: grey;
+}
+/* Buttons Styling */
+.action-buttons {
+  margin-top: 20px;
+}
+
+.explore-button,
+.learn-more-button {
+  background-color: white;
+  color: #74ab4e;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: 1px solid #74ab4e;
+  cursor: pointer;
+  margin: 5px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.explore-button:hover {
+  background-color: #74ab4e;
+  color: white;
+}
+
+.learn-more-button {
+  background-color: white;
+  color: #74ab4e;
+}
+
+.learn-more-button:hover {
+  background-color: #74ab4e;
+  color: white;
+}
+
+/* Benefits Section Styling */
+.solution-benefits {
+  padding: 20px;
+  border-radius: 10px; /* Rounded corners */
+  margin-top: 10px;
+}
+
+.solution-benefits ul {
+  list-style-type: none; /* Removes default list bullets */
+  padding: 0; /* Removes default padding */
+  margin: 0; /* Removes default margin */
+  max-width: 600px; /* Limits the width */
+  text-align: left; /* Aligns text to the left */
+}
+
+.solution-benefits li {
+  position: relative; /* For positioning the checkmark */
+  padding-left: 30px; /* Creates space for the checkmark */
+  margin-bottom: 10px; /* Adds space between items */
+  font-size: 16px; /* Adjusts font size */
+  line-height: 1.5; /* Improves text readability */
+  color: #333; /* Text color */
+}
+
+.solution-benefits li::before {
+  content: "✔"; /* Unicode for the checkmark */
+  position: absolute; /* Positions the checkmark relative to the li */
+  left: 0; /* Aligns the checkmark to the left */
+  top: 50%; /* Centers the checkmark vertically */
+  transform: translateY(-50%); /* Adjusts vertical alignment */
+  color: #4caf50; /* Green color for the checkmark */
+  font-size: 18px; /* Adjusts the size of the checkmark */
+}
+
+/* Responsive Design for Solution Content */
+@media (max-width: 768px) {
+
+  .solution-section{
+    margin-top: 280px;
+
+  }
+  .solution-content {
+    flex-direction: column; /* Stack the containers vertically */
+    align-items: center; /* Center align the content */
+    width: 100%; /* Full width for smaller screens */
+    padding: 10px; /* Add some padding */
+    margin-left: auto;
+  }
+
+  .left-container,
+  .right-container {
+    flex: none; /* Disable flex-grow/shrink */
+    width: 100%; /* Make both containers full width */
+    padding: 0px; /* Add inner spacing for better readability */
+  }
+
+
+
+  .solution-description {
+    font-size: 1.2rem; /* Adjust font size for smaller screens */
+    width: 100%; /* Full width */
+    padding: 20px 20px;
+  }
+
+  .solution-title {
+    font-size: 2.5rem; /* Reduce font size */
+  }
+}
+
+/* Additional Responsive Adjustments for 1024px */
+@media (max-width: 1024px) {
+  .solution-content {
+    width: 100%; /* Make full width */
+    gap: 10px; /* Reduce the gap between containers */
+  }
+
+  .solution-title {
+    font-size: 3rem; /* Slightly smaller title */
+  }
+
+  .solution-description {
+    font-size: 1.4rem; /* Adjust description size */
+  }
+}

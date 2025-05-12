@@ -1,0 +1,91 @@
+/* body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+  } */
+
+.workflow-main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  flex-wrap: wrap;
+  font-family: "Nunito Sans", sans-serif;
+}
+.container {
+  margin: 0 auto;
+  padding: 20px;
+  color: #5a5956;
+  justify-content: center;
+}
+
+.content {
+  flex: 1;
+  /* min-width: 300px; */
+  margin-right: 20px;
+}
+
+.content h1 {
+    font-size: 3.5rem;
+    color: #5fc563;
+    font-weight: 600;
+    /* margin-bottom: 10px; */
+    gap: 10px;
+    display: flex;
+    letter-spacing: 2px;
+    flex-wrap: wrap;
+    font-family: "Coming Soon", cursive;
+    text-transform: uppercase;
+}
+
+.content h1 span{
+    color: gray;
+}
+
+.content h2 {
+  font-size: 1.6rem;
+  color: gray;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.content h2 span{
+    color: #5fc563;
+}
+
+.content ol {
+  list-style: none;
+  padding: 0;
+  font-weight: 500;
+  
+}
+
+.content ol li {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  line-height: 1.6;
+
+}
+
+.content ol li::before {
+  content: "•";
+  color: #6c9d30;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .content {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+}

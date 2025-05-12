@@ -1,0 +1,184 @@
+.main-signup {
+    font-family: "Nunito Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+
+  }
+  
+  .signup-container {
+    /* width: 80%; */
+    border-radius: 10px;
+    /* max-height: 90vh; */
+    max-width: 1200px;
+    background: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 40px;
+    overflow: hidden;
+  }
+  
+  .signup-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 28px;
+  }
+  
+  .subtitle {
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    margin-top: 12px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+  .subtitle a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+  .subtitle a:hover {
+    text-decoration: underline;
+}
+  
+  .signup-container .form-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin-top: 30px;
+  }
+
+  .form-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .form-column input,
+  .form-column select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .form-column input:focus,
+.form-column select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+  
+  .form-column label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+    font-weight: bold;
+    display: block;
+  }
+  
+  .radio-group,
+  .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .checkbox-group label,
+  .radio-group label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    cursor: pointer;
+
+  }
+  
+  .checkbox-group input,
+  .radio-group input {
+    margin-right: 5px;
+  }
+  
+  .try {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+  }
+  
+  .try div {
+    flex: 1;
+  }
+  
+  /* Hover effects for buttons */
+.signup-btn {
+    display: block;
+    width: 100%;
+    background: #28a745;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    margin-top: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+.signup-btn:hover {
+    background: #218838;
+    transform: scale(1.02);
+}
+
+.signup-btn:active {
+    transform: scale(0.98);
+}
+
+  
+  .terms {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #555;
+    margin-top: 10px;
+  }
+  
+  .terms a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .terms a:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    .signup-container .form-section {
+      flex-direction: column;
+      gap: 30px;
+    }
+  
+    .try {
+      flex-direction: column;
+      gap: 15px;
+    }
+  }
+  
