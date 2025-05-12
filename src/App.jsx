@@ -1,6 +1,7 @@
 import "./App.css";
 import MainPage from "./Component/Firstpage/MainPage";
-import Signup from "./pages/signup/signup";
+// import Signup from "./pages/signup/signup.jsx";
+import Signup from "./pages/signup/Signup.jsx"
 import "./i18n.js"
 import {
   BrowserRouter as Router,
