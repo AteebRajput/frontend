@@ -1,6 +1,4 @@
 import {
-  ArrowLeft,
-  DollarSign,
   Package,
   ShoppingCart,
   TrendingUp,
@@ -13,8 +11,8 @@ import {
   CardTitle,
 } from "../ui/product-ui/Card"
 import { useParams } from "react-router-dom"
-import { Button } from "../ui/product-ui/Button"
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/product-ui/Avatar"
+
+import { Avatar, AvatarImage } from "../ui/product-ui/Avatar"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/product-ui/Tabs"
 import { Badge } from "../ui/Badge"
 import { Progress } from "../ui/product-ui/Progress"
@@ -46,7 +44,7 @@ const DetailedSellerAnalytics = () => {
     const params = useParams();
     const sellerId = params.id;
     const dispatch = useDispatch();
-    const { sellerDetailedAnalytics, loading, error } = useSelector((state) => state.analytics);
+    const { sellerDetailedAnalytics, loading, } = useSelector((state) => state.analytics);
   
     useEffect(() => {
       dispatch(fetchSellerDetailedAnalytics(sellerId));

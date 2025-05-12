@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllSellersAnalytics } from "../../../slices/analyticsSlice"; // update path as needed
-import { Card, CardContent } from "../ui/card";
+import { Card, CardContent } from "../ui/Card";
 import { Button } from "../ui/Button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/product-ui/Avatar";
 import { Link } from "react-router-dom";
