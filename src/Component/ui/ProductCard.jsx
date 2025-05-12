@@ -1,7 +1,7 @@
 import  { useState, useEffect } from "react";
 import { useCallback } from "react";
 import { Clock, Tag, ShoppingCart, Gavel, AlertCircle } from "lucide-react";
-import { Button } from "./Input";
+import { Button } from "./Button";
 import { Input } from "./Input";
 import { Alert, AlertDescription } from "../ui/product-ui/Alert";
 import { fetchAuctionDetails, placeBid } from "../../../slices/auctionSlice";
