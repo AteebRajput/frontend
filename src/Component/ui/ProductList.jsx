@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllProducts } from '../redux/productSlice';
+import { fetchAllProducts } from '../../../slices/productSlice';
 import ProductCard from './ProductCard';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Input } from './Input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./Select";
 
 const ProductList = () => {
   const dispatch = useDispatch();
