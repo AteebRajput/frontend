@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { useCallback } from "react";
 import { Clock, Tag, ShoppingCart, Gavel, AlertCircle } from "lucide-react";
-import { Button } from "../ui/Button";
-import { Input } from "../ui/input";
+import { Button } from "./Input";
+import { Input } from "./Input";
 import { Alert, AlertDescription } from "../ui/product-ui/Alert";
 import { fetchAuctionDetails, placeBid } from "../../../slices/auctionSlice";
 import { createOrder } from "../../../slices/orderSlice";
 import { toast } from "react-toastify";
 import ChatButton from "../chat/ChatButton";
-import ChatDialog from "../chat/ChatDialog";
+
 
 import {
   Card,
