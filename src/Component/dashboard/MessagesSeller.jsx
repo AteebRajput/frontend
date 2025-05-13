@@ -26,17 +26,16 @@ export default function MessagesSeller() {
   const [activeTab, setActiveTab] = useState('all');
   const [usernames, setUsernames] = useState({}); 
 
-  const {t} = useTranslation()
+  const {t} = useTranslation();
 
   // Function to fetch and store username for a userId
   const fetchAndStoreUsername = async (userId) => {
     if (usernames[userId]) return; // already fetched
 
     try {
-      const response = await axios.get(`https://backend-production-c261.up.railway.app/api/auth/getUsername?userId=${userId}`);
+      const response = await axios.get(`http://localhost:5000/api/auth/getUsername?userId=${userId}`);
       const username = response.data.username;
       setUsernames((prev) => ({ ...prev, [userId]: username }));
-
     } catch (error) {
       console.error(`Error fetching username for ${userId}:`, error.message);
       setUsernames((prev) => ({ ...prev, [userId]: "Unknown User" }));
@@ -46,17 +45,22 @@ export default function MessagesSeller() {
   // Fetch chats and usernames when component mounts
   useEffect(() => {
     const unsubscribe = listenToChats(currentUser.id, async (updatedChats) => {
-      setChats(updatedChats);
+      // Filter chats to include only those that have the current user as a participant
+      const filteredChats = updatedChats.filter((chat) => 
+        chat.participants.includes(currentUser.id)
+      );
+
+      setChats(filteredChats);
 
       // For each chat, fetch the other participant's username
-      updatedChats.forEach((chat) => {
+      filteredChats.forEach((chat) => {
         const otherUserId = chat.participants.find((id) => id !== currentUser.id);
         if (otherUserId) fetchAndStoreUsername(otherUserId);
       });
     });
 
     return () => unsubscribe();
-  }, []);
+  }, []); // The useEffect only runs once when the component mounts
 
   // Get readable name for other user in chat
   const getOtherUserName = (participants, currentUserId) => {
@@ -64,8 +68,6 @@ export default function MessagesSeller() {
     return usernames[otherUserId] || "Loading...";
   };
 
-  console.log("Username:",usernames);
-  
   const handleChatSelect = (chat) => {
     setSelectedChat(chat);
     setIsChatDialogOpen(true);
@@ -75,7 +77,7 @@ export default function MessagesSeller() {
   const filteredChats = activeTab === 'all' ? chats : chats.filter((chat) => chat.unreadCount > 0);
 
   return (
-<div className="container mx-auto py-6">
+    <div className="container mx-auto py-6">
       <div className="grid grid-cols-1 gap-6">
         <Card>
           <CardHeader>
@@ -103,8 +105,8 @@ export default function MessagesSeller() {
 
               <TabsContent value="all">
                 <div className="space-y-1">
-                  {chats.length > 0 ? (
-                    chats.map((chat) => (
+                  {filteredChats.length > 0 ? (
+                    filteredChats.map((chat) => (
                       <ChatListItem
                         key={chat.id}
                         chat={chat}

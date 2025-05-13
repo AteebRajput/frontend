@@ -42,7 +42,7 @@ fetchAndStoreUsername(sellerId)
     setChatId(newChatId);
     setIsDialogOpen(true);
   };
-  console.log("seller name",);
+  // console.log("seller name",);
   
 
   return (

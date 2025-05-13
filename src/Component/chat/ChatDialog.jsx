@@ -12,7 +12,7 @@ function ChatDialog({ isOpen, onClose, chatId, currentUserId, recipientName, pro
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const messagesEndRef = useRef(null);
-  console.log("recipent name",recipientName);
+ 
   
 
   useEffect(() => {
@@ -36,9 +36,7 @@ function ChatDialog({ isOpen, onClose, chatId, currentUserId, recipientName, pro
   const handleSendMessage = async (e) => {
     e.preventDefault();
     if (!newMessage.trim()) return;
-    console.log("chatid",chatId);
-    console.log("senderid",currentUserId);
-    console.log("message",newMessage);
+
     await sendMessage(chatId, currentUserId, newMessage);
     setNewMessage('');
   };
