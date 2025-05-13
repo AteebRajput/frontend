@@ -1,13 +1,16 @@
 import { Mail, MapPin, Phone } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/product-ui/Card"
 import { Badge } from "../ui/Badge"
+import { useTranslation } from "react-i18next"
 
 export default function LogisticsPage() {
+  const { t } = useTranslation()
+
   return (
     <div className="container mx-auto py-8 px-4">
-      <h1 className="text-3xl font-bold text-center text-black mb-8">Pakistan Logistics Companies</h1>
+      <h1 className="text-3xl font-bold text-center text-black mb-8">{t("pakistanLogistics")}</h1>
       <p className="text-center text-muted-foreground mb-10 max-w-2xl mx-auto">
-        These are the Pakistan's leading logistics and courier companies for your shipping needs.
+        {t("tagline")}
       </p>
 
       <div className="grid grid-cols-1 gap-8">
@@ -16,10 +19,10 @@ export default function LogisticsPage() {
           <CardHeader className="bg-gray-50">
             <div className="flex justify-between items-center">
               <div>
-                <CardTitle className="text-2xl text-red-600">TCS</CardTitle>
-                <CardDescription>Pakistan's Premier Courier Service</CardDescription>
+                <CardTitle className="text-2xl text-red-600">{t("tcs")}</CardTitle>
+                <CardDescription>{t("premiumCourier")}</CardDescription>
               </div>
-              <Badge className="bg-red-600 text-white">Premium Service</Badge>
+              <Badge className="bg-red-600 text-white">{t("premiumServices")}</Badge>
             </div>
           </CardHeader>
           <CardContent className="pt-6">
@@ -27,31 +30,23 @@ export default function LogisticsPage() {
               <div className="space-y-4">
                 <div className="flex items-start gap-2">
                   <MapPin className="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" />
-                  <span>CIVIL AVIATION, 101 - 104 Airport Road, Jinnah International Airport, Karachi, 74200</span>
+                  <span>{t("tcsAddress")}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="h-5 w-5 text-red-600 flex-shrink-0" />
-                  <span>(021) 111 123 456</span>
+                  <span>{t("tcsPhone")}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail className="h-5 w-5 text-red-600 flex-shrink-0" />
                   <a href="mailto:customerservices@tcs.com.pk" className="text-blue-600 hover:underline">
-                    customerservices@tcs.com.pk
+                    {t("tcsEmail")}
                   </a>
                 </div>
               </div>
-
-              <div>
-                <div className="flex justify-center mt-4">
-                  <a
-                    href="https://www.tcs.com.pk/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-10 items-center justify-center rounded-md bg-red-600 px-8 text-sm font-medium text-white shadow transition-colors hover:bg-red-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-                  >
-                    Visit TCS Website
-                  </a>
-                </div>
+              <div className="flex justify-center mt-4">
+                <a href="https://www.tcs.com.pk/" target="_blank" rel="noopener noreferrer" className="inline-flex h-10 items-center justify-center rounded-md bg-red-600 px-8 text-sm font-medium text-white shadow transition-colors hover:bg-red-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+                  {t("tcsWebsite")}
+                </a>
               </div>
             </div>
           </CardContent>
@@ -62,10 +57,10 @@ export default function LogisticsPage() {
           <CardHeader className="bg-gray-50">
             <div className="flex justify-between items-center">
               <div>
-                <CardTitle className="text-2xl text-yellow-600">LEOPARD</CardTitle>
-                <CardDescription>Fast & Reliable Courier Service</CardDescription>
+                <CardTitle className="text-2xl text-yellow-600">{t("leopard")}</CardTitle>
+                <CardDescription>{t("leopardTagline")}</CardDescription>
               </div>
-              <Badge className="bg-yellow-600 text-white">Express Delivery</Badge>
+              <Badge className="bg-yellow-600 text-white">{t("expressDelivery")}</Badge>
             </div>
           </CardHeader>
           <CardContent className="pt-6">
@@ -73,31 +68,23 @@ export default function LogisticsPage() {
               <div className="space-y-4">
                 <div className="flex items-start gap-2">
                   <MapPin className="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />
-                  <span>House, 19, Leopards, F, 19-F Imam Ahmed Rd, P.E.C.H.S Block 2 Block 6 PECHS, Karachi</span>
+                  <span>{t("leopardAddress")}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="h-5 w-5 text-yellow-600 flex-shrink-0" />
-                  <span>(021) 111 300 786</span>
+                  <span>{t("leopardPhone")}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail className="h-5 w-5 text-yellow-600 flex-shrink-0" />
                   <a href="mailto:customerservice@leopardscourier.com" className="text-blue-600 hover:underline">
-                    customerservice@leopardscourier.com
+                    {t("leopardEmail")}
                   </a>
                 </div>
               </div>
-
-              <div>
-                <div className="flex justify-center mt-4">
-                  <a
-                    href="https://www.leopardscourier.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-10 items-center justify-center rounded-md bg-yellow-600 px-8 text-sm font-medium text-white shadow transition-colors hover:bg-yellow-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-                  >
-                    Visit LEOPARD Website
-                  </a>
-                </div>
+              <div className="flex justify-center mt-4">
+                <a href="https://www.leopardscourier.com/" target="_blank" rel="noopener noreferrer" className="inline-flex h-10 items-center justify-center rounded-md bg-yellow-600 px-8 text-sm font-medium text-white shadow transition-colors hover:bg-yellow-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+                  {t("leopardWebsite")}
+                </a>
               </div>
             </div>
           </CardContent>
@@ -108,10 +95,10 @@ export default function LogisticsPage() {
           <CardHeader className="bg-gray-50">
             <div className="flex justify-between items-center">
               <div>
-                <CardTitle className="text-2xl text-blue-600">Daewoo Fastex</CardTitle>
-                <CardDescription>Nationwide Logistics Network</CardDescription>
+                <CardTitle className="text-2xl text-blue-600">{t("daewoo")}</CardTitle>
+                <CardDescription>{t("daewooTagline")}</CardDescription>
               </div>
-              <Badge className="bg-blue-600 text-white">Nationwide Coverage</Badge>
+              <Badge className="bg-blue-600 text-white">{t("nationwideCoverage")}</Badge>
             </div>
           </CardHeader>
           <CardContent className="pt-6">
@@ -119,31 +106,23 @@ export default function LogisticsPage() {
               <div className="space-y-4">
                 <div className="flex items-start gap-2">
                   <MapPin className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                  <span>231-A Ferozepur Road, Kalma Chowk Lahore, Punjab Pakistan</span>
+                  <span>{t("daewooAddress")}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="h-5 w-5 text-blue-600 flex-shrink-0" />
-                  <span>042-111-007-009</span>
+                  <span>{t("daewooPhone")}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail className="h-5 w-5 text-blue-600 flex-shrink-0" />
                   <a href="mailto:fastex@daewoofastex.com" className="text-blue-600 hover:underline">
-                    fastex@daewoofastex.com
+                    {t("daewooEmail")}
                   </a>
                 </div>
               </div>
-
-              <div>
-                <div className="flex justify-center mt-4">
-                  <a
-                    href="https://daewoo.com.pk/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-10 items-center justify-center rounded-md bg-blue-600 px-8 text-sm font-medium text-white shadow transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-                  >
-                    Visit Daewoo Fastex Website
-                  </a>
-                </div>
+              <div className="flex justify-center mt-4">
+                <a href="https://daewoo.com.pk/" target="_blank" rel="noopener noreferrer" className="inline-flex h-10 items-center justify-center rounded-md bg-blue-600 px-8 text-sm font-medium text-white shadow transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+                  {t("daewooWebsite")}
+                </a>
               </div>
             </div>
           </CardContent>
@@ -154,10 +133,10 @@ export default function LogisticsPage() {
           <CardHeader className="bg-gray-50">
             <div className="flex justify-between items-center">
               <div>
-                <CardTitle className="text-2xl text-green-600">Post Ex</CardTitle>
-                <CardDescription>Modern Logistics Solutions</CardDescription>
+                <CardTitle className="text-2xl text-green-600">{t("postex")}</CardTitle>
+                <CardDescription>{t("postexTagline")}</CardDescription>
               </div>
-              <Badge className="bg-green-600 text-white">Affordable Rates</Badge>
+              <Badge className="bg-green-600 text-white">{t("affordableRates")}</Badge>
             </div>
           </CardHeader>
           <CardContent className="pt-6">
@@ -165,31 +144,23 @@ export default function LogisticsPage() {
               <div className="space-y-4">
                 <div className="flex items-start gap-2">
                   <MapPin className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                  <span>Lahore, Punjab</span>
+                  <span>{t("postexAddress")}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="h-5 w-5 text-green-600 flex-shrink-0" />
-                  <span>support@postex.pk</span>
+                  <span>{t("postexPhone")}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail className="h-5 w-5 text-green-600 flex-shrink-0" />
                   <a href="mailto:support@postex.pk" className="text-blue-600 hover:underline">
-                    support@postex.pk
+                    {t("postexEmail")}
                   </a>
                 </div>
               </div>
-
-              <div>
-                <div className="flex justify-center mt-4">
-                  <a
-                    href="https://postex.pk/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-10 items-center justify-center rounded-md bg-green-600 px-8 text-sm font-medium text-white shadow transition-colors hover:bg-green-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-                  >
-                    Visit Post Ex Website
-                  </a>
-                </div>
+              <div className="flex justify-center mt-4">
+                <a href="https://postex.pk/" target="_blank" rel="noopener noreferrer" className="inline-flex h-10 items-center justify-center rounded-md bg-green-600 px-8 text-sm font-medium text-white shadow transition-colors hover:bg-green-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+                  {t("postexWebsite")}
+                </a>
               </div>
             </div>
           </CardContent>
@@ -200,10 +171,10 @@ export default function LogisticsPage() {
           <CardHeader className="bg-gray-50">
             <div className="flex justify-between items-center">
               <div>
-                <CardTitle className="text-2xl text-purple-600">M&P</CardTitle>
-                <CardDescription>Comprehensive Logistics Services</CardDescription>
+                <CardTitle className="text-2xl text-purple-600">{t("mp")}</CardTitle>
+                <CardDescription>{t("mpTagline")}</CardDescription>
               </div>
-              <Badge className="bg-purple-600 text-white">Multiple Services</Badge>
+              <Badge className="bg-purple-600 text-white">{t("multipleServices")}</Badge>
             </div>
           </CardHeader>
           <CardContent className="pt-6">
@@ -211,34 +182,23 @@ export default function LogisticsPage() {
               <div className="space-y-4">
                 <div className="flex items-start gap-2">
                   <MapPin className="h-5 w-5 text-purple-600 mt-0.5 flex-shrink-0" />
-                  <span>
-                    Town, Plot No. C-118 & C-119 Korangi Industrial Area, Karachi 31-A Mehran, Extension, Karachi,
-                    Pakistan
-                  </span>
+                  <span>{t("mpAddress")}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="h-5 w-5 text-purple-600 flex-shrink-0" />
-                  <span>(021) 111-202-202</span>
+                  <span>{t("mpPhone")}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail className="h-5 w-5 text-purple-600 flex-shrink-0" />
                   <a href="mailto:contact@mulphilog.com" className="text-blue-600 hover:underline">
-                    contact@mulphilog.com
+                    {t("mpEmail")}
                   </a>
                 </div>
               </div>
-
-              <div>
-                <div className="flex justify-center mt-4">
-                  <a
-                    href="https://www.mulphilog.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-10 items-center justify-center rounded-md bg-purple-600 px-8 text-sm font-medium text-white shadow transition-colors hover:bg-purple-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-                  >
-                    Visit M&P Website
-                  </a>
-                </div>
+              <div className="flex justify-center mt-4">
+                <a href="https://www.mulphilog.com/" target="_blank" rel="noopener noreferrer" className="inline-flex h-10 items-center justify-center rounded-md bg-purple-600 px-8 text-sm font-medium text-white shadow transition-colors hover:bg-purple-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+                  {t("mpWebsite")}
+                </a>
               </div>
             </div>
           </CardContent>
@@ -249,10 +209,10 @@ export default function LogisticsPage() {
           <CardHeader className="bg-gray-50">
             <div className="flex justify-between items-center">
               <div>
-                <CardTitle className="text-2xl text-orange-600">Trax</CardTitle>
-                <CardDescription>Efficient Delivery Solutions</CardDescription>
+                <CardTitle className="text-2xl text-orange-600">{t("trax")}</CardTitle>
+                <CardDescription>{t("traxTagline")}</CardDescription>
               </div>
-              <Badge className="bg-orange-600 text-white">Multiple Service Tiers</Badge>
+              <Badge className="bg-orange-600 text-white">{t("multipleTiers")}</Badge>
             </div>
           </CardHeader>
           <CardContent className="pt-6">
@@ -260,31 +220,23 @@ export default function LogisticsPage() {
               <div className="space-y-4">
                 <div className="flex items-start gap-2">
                   <MapPin className="h-5 w-5 text-orange-600 mt-0.5 flex-shrink-0" />
-                  <span>Plot 105, Sector 7-A, Mehran Town, Korangi, Karachi</span>
+                  <span>{t("traxAddress")}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="h-5 w-5 text-orange-600 flex-shrink-0" />
-                  <span>info@trax.pk</span>
+                  <span>{t("traxPhone")}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail className="h-5 w-5 text-orange-600 flex-shrink-0" />
                   <a href="mailto:info@trax.pk" className="text-blue-600 hover:underline">
-                    info@trax.pk
+                    {t("traxEmail")}
                   </a>
                 </div>
               </div>
-
-              <div>
-                <div className="flex justify-center mt-4">
-                  <a
-                    href="https://trax.pk/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-10 items-center justify-center rounded-md bg-orange-600 px-8 text-sm font-medium text-white shadow transition-colors hover:bg-orange-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-                  >
-                    Visit Trax Website
-                  </a>
-                </div>
+              <div className="flex justify-center mt-4">
+                <a href="https://trax.pk/" target="_blank" rel="noopener noreferrer" className="inline-flex h-10 items-center justify-center rounded-md bg-orange-600 px-8 text-sm font-medium text-white shadow transition-colors hover:bg-orange-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+                  {t("traxWebsite")}
+                </a>
               </div>
             </div>
           </CardContent>

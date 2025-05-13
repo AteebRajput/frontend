@@ -4,12 +4,35 @@ import React, { useState } from 'react';
 import { Button } from '../ui/product-ui/Button';
 import { MessageCircle } from 'lucide-react';
 import ChatDialog from './ChatDialog';
+import axios from 'axios';
+
 import { createChat } from '../../lib/chatUtils';
+import { use } from 'i18next';
+
+
 
 function ChatButton({ currentUserId, sellerId, sellerName, productId, productName, productImage }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [chatId, setChatId] = useState(null);
+  const [username,setUsername] = useState("")
 console.log("cuurent user",currentUserId);
+console.log("Seller name",sellerName);
+
+const fetchAndStoreUsername = async (userId) => {
+
+
+  try {
+    const response = await axios.get(`https://backend-production-c261.up.railway.app/api/auth/getUsername?userId=${userId}`);
+    const user = response.data.username;
+    setUsername(user);
+
+  } catch (error) {
+    console.error(`Error fetching username for ${userId}:`, error.message);
+    
+  }
+};
+
+fetchAndStoreUsername(sellerId)
 
   const handleStartChat = async () => {
     if (currentUserId === sellerId) {
@@ -20,6 +43,8 @@ console.log("cuurent user",currentUserId);
     setChatId(newChatId);
     setIsDialogOpen(true);
   };
+  console.log("seller name",);
+  
 
   return (
     <>
@@ -34,7 +59,7 @@ console.log("cuurent user",currentUserId);
           onClose={() => setIsDialogOpen(false)}
           chatId={chatId}
           currentUserId={currentUserId}
-          recipientName={sellerName}
+          recipientName={username}
           productName={productName}
         />
       )}

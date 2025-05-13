@@ -59,7 +59,7 @@ export const fetchUserData = createAsyncThunk(
       }
 
       // Send userId as a query parameter
-      const response = await axios.get(`http://localhost:5000/api/auth/getUser?userId=${userId}`);
+      const response = await axios.get(`https://backend-production-c261.up.railway.app/api/auth/getUser?userId=${userId}`);
       return response.data.user;
     } catch (error) {
       return rejectWithValue(
@@ -82,7 +82,7 @@ const fetchUserName = createAsyncThunk(
       }
 
       // Send userId as a query parameter
-      const response = await axios.get(`http://localhost:5000/api/auth/getUsername?userId=${userId}`);
+      const response = await axios.get(`https://backend-production-c261.up.railway.app/api/auth/getUsername?userId=${userId}`);
       return response.data.username;
     } catch (error) {
       return rejectWithValue(

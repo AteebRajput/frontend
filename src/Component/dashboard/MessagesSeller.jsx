@@ -6,6 +6,7 @@ import ChatDialog from '../chat/ChatDialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/product-ui/Tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/product-ui/Card';
 import { MessageSquare } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 // Get current user from localStorage
 const user = JSON.parse(localStorage.getItem("user"));
@@ -23,7 +24,9 @@ export default function MessagesSeller() {
   const [selectedChat, setSelectedChat] = useState(null);
   const [isChatDialogOpen, setIsChatDialogOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('all');
-  const [usernames, setUsernames] = useState({}); // store usernames by userId
+  const [usernames, setUsernames] = useState({}); 
+
+  const {t} = useTranslation()
 
   // Function to fetch and store username for a userId
   const fetchAndStoreUsername = async (userId) => {
@@ -33,6 +36,7 @@ export default function MessagesSeller() {
       const response = await axios.get(`https://backend-production-c261.up.railway.app/api/auth/getUsername?userId=${userId}`);
       const username = response.data.username;
       setUsernames((prev) => ({ ...prev, [userId]: username }));
+
     } catch (error) {
       console.error(`Error fetching username for ${userId}:`, error.message);
       setUsernames((prev) => ({ ...prev, [userId]: "Unknown User" }));
@@ -60,6 +64,8 @@ export default function MessagesSeller() {
     return usernames[otherUserId] || "Loading...";
   };
 
+  console.log("Username:",usernames);
+  
   const handleChatSelect = (chat) => {
     setSelectedChat(chat);
     setIsChatDialogOpen(true);
@@ -69,24 +75,24 @@ export default function MessagesSeller() {
   const filteredChats = activeTab === 'all' ? chats : chats.filter((chat) => chat.unreadCount > 0);
 
   return (
-    <div className="container mx-auto py-6">
+<div className="container mx-auto py-6">
       <div className="grid grid-cols-1 gap-6">
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <MessageSquare className="h-5 w-5" />
-              Your Messages
+              {t("yourMessages")}
             </CardTitle>
             <CardDescription>
-              View and manage your conversations with buyers and sellers
+              {t("yourMessagesDescription")}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="all" className="w-full" onValueChange={setActiveTab}>
               <TabsList className="mb-4">
-                <TabsTrigger value="all">All Messages</TabsTrigger>
+                <TabsTrigger value="all">{t("allMessages")}</TabsTrigger>
                 <TabsTrigger value="unread">
-                  Unread
+                  {t("unread")}
                   {chats.some((chat) => chat.unreadCount > 0) && (
                     <span className="ml-2 bg-destructive text-destructive-foreground rounded-full px-2 py-0.5 text-xs">
                       {chats.reduce((acc, chat) => acc + chat.unreadCount, 0)}
@@ -111,9 +117,9 @@ export default function MessagesSeller() {
                   ) : (
                     <div className="text-center py-8 text-muted-foreground">
                       <MessageSquare className="mx-auto h-12 w-12 mb-3 opacity-20" />
-                      <p>No messages yet</p>
+                      <p>{t("noMessages")}</p>
                       <p className="text-sm">
-                        When you contact sellers or receive messages, they'll appear here
+                        {t("noMessagesHint")}
                       </p>
                     </div>
                   )}
@@ -135,7 +141,7 @@ export default function MessagesSeller() {
                     ))
                   ) : (
                     <div className="text-center py-8 text-muted-foreground">
-                      <p>No unread messages</p>
+                      <p>{t("noUnreadMessages")}</p>
                     </div>
                   )}
                 </div>
@@ -144,8 +150,6 @@ export default function MessagesSeller() {
           </CardContent>
         </Card>
       </div>
-
-      {/* {selectedChat ? `chatID: ${selectedChat.id}` : `No chat ID found`} */}
 
       {selectedChat && (
         <ChatDialog

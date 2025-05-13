@@ -329,7 +329,7 @@ const currentUserId = JSON.parse(localStorage.getItem("userId")).userId
   <ChatButton 
       currentUserId={currentUserId}
       sellerId={product.seller}
-      sellerName={product.name}
+      sellerName={product.sellerName}
       productId={product._id}
       productName={product.name}
       productImage={product.images[0]}

@@ -182,6 +182,7 @@ export default function ProductsPage() {
     const [selectedCrop, setSelectedCrop] = useReactState("");
     const [selectedArea, setSelectedArea] = useReactState("");
     const [predictedPrice, setPredictedPrice] = useReactState(null);
+    const [category, setCategory] = useState("");
     const [isPredicting, setIsPredicting] = useReactState(false);
     const [selectedProvince, setSelectedProvince] = useState("");
 
@@ -370,7 +371,7 @@ export default function ProductsPage() {
         upForAuction: data.upForAuction === "true",
         harvestDate: data.harvestDate ? new Date(data.harvestDate) : null,
         expiryDate: data.expiryDate ? new Date(data.expiryDate) : null,
-        category: data.category,
+        category: category,
         bidEndTime:
           data.upForAuction === "true" && data.bidEndTime
             ? new Date(data.bidEndTime)
@@ -433,6 +434,7 @@ export default function ProductsPage() {
                     onValueChange={(value) => {
                       // handle category change (e.g., update form state)
                       console.log("Selected category:", value);
+                      setCategory(value)
                     }}
                     required
                   >

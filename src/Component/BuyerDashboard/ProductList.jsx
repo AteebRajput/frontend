@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllTheProducts } from "../../../slices/productSlice";
 import { placeBid } from "../../../slices/auctionSlice";
@@ -6,14 +6,8 @@ import { createOrder } from "../../../slices/orderSlice";
 import ProductCard from "../ui/ProductCard";
 import ProductDetail from "../ui/ProductDetail";
 import { Input } from "../ui/Input";
-import {useTranslation} from "react-i18next";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "../ui/product-ui/Dialog";
+import { useTranslation } from "react-i18next";
+
 import {
   Select,
   SelectContent,
@@ -21,8 +15,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/Select";
-import { Button } from "../ui/Button";
-import { Switch } from "../ui/product-ui/Switch";
 
 const ProductList = () => {
   const dispatch = useDispatch();
@@ -31,17 +23,35 @@ const ProductList = () => {
   const { t } = useTranslation(); // Initialize translation function
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterCategory, setFilterCategory] = useState("");
+  const [filterCategory, setFilterCategory] = useState("_all");
   const [sortBy, setSortBy] = useState("");
   const [viewAuctions, setViewAuctions] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [bidAmount, setBidAmount] = useState("");
   const [orderAmount, setOrderAmount] = useState(""); // For placing order
+  const [isOrderProcessing, setIsOrderProcessing] = useState(false);
+
+  // Predefined categories
+  const predefinedCategories = ["Fruits", "Vegetables", "Grains", "Fertilizers", "Equipment"];
+
+  // Get user ID once
+  const userId = localStorage.getItem("userId");
+  
+  // Create a memoized refresh function
+  const refreshProducts = useCallback(() => {
+    dispatch(fetchAllTheProducts(userId));
+  }, [dispatch, userId]);
 
   useEffect(() => {
-    const userId = localStorage.getItem("userId");
-    dispatch(fetchAllTheProducts(userId));
-  }, [dispatch]);
+    refreshProducts();
+  }, [refreshProducts]);
+  
+  // Add another effect to refresh data after order state changes
+  useEffect(() => {
+    if (!isOrderProcessing) {
+      refreshProducts();
+    }
+  }, [isOrderProcessing, refreshProducts]);
 
   const handleProductDetails = (product) => {
     const productAuction = auctions.find(
@@ -55,7 +65,7 @@ const ProductList = () => {
 
     const bidData = {
       auctionId: product.auction._id,
-      bidderId: localStorage.getItem("userId"),
+      bidderId: userId,
       bidAmount: parseFloat(bidAmount),
     };
 
@@ -68,26 +78,54 @@ const ProductList = () => {
   };
 
   const handlePlaceOrder = async (product) => {
-    if (!product) return;
+    if (!product || isOrderProcessing) return;
+    
+    setIsOrderProcessing(true);
   
     const orderData = {
       productId: product._id,
-      winnerId: localStorage.getItem("userId"), // Assuming buyer is the user
+      winnerId: userId,
       amount: parseFloat(orderAmount),
       sellerId: product.ownerId,
     };
   
     try {
+      // Create the order
       await dispatch(createOrder(orderData)).unwrap();
       setOrderAmount("");
-      // Reload the page after successful order
-      window.location.reload();
+      
+      // Force refresh the products list with a new dispatch
+      const refreshAction = await dispatch(fetchAllTheProducts(userId));
+      
+      // Close product detail dialog if open
+      if (selectedProduct && selectedProduct._id === product._id) {
+        setSelectedProduct(null);
+      }
+      
+      // If the redux action didn't update the state for some reason, force a local update
+      // by creating a modified copy of the product with reduced quantity
+      if (products.find(p => p._id === product._id)?.quantity === product.quantity) {
+        console.log("Redux state not updating properly, forcing local update");
+        const updatedProducts = products.map(p => {
+          if (p._id === product._id) {
+            return { ...p, quantity: p.quantity - parseFloat(orderAmount) };
+          }
+          return p;
+        });
+        
+        // Dispatch a local action to update the products
+        dispatch({ 
+          type: 'products/updateProductsState',
+          payload: updatedProducts 
+        });
+      }
     } catch (error) {
       console.error("Order creation error:", error);
+    } finally {
+      setIsOrderProcessing(false);
     }
   };
   
-
   // Filter products based on the switch and additional filters
   const filteredProducts = products
     .filter(
@@ -96,7 +134,7 @@ const ProductList = () => {
     .filter(
       (product) =>
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        (filterCategory ? product.category === filterCategory : true)
+        (filterCategory === "_all" || product.category === filterCategory)
     )
     .sort((a, b) => {
       switch (sortBy) {
@@ -111,67 +149,71 @@ const ProductList = () => {
       }
     });
 
-  const categories = [...new Set(products.map((p) => p.category))];
-  console.log(categories);
+  // Get unique categories from products, filtering out null, undefined, and empty strings
+  const existingCategories = [...new Set(products.map((p) => p.category).filter(Boolean))];
   
+  // Combine predefined and existing categories, removing duplicates
+  const allCategories = [...new Set([...predefinedCategories, ...existingCategories])];
 
   return (
     <div className="container mx-auto p-4">
-      <div className="flex items-center mb-6 space-x-4">
-       {/* Switch for Auction/All Products */}
-<label className="relative inline-flex items-center cursor-pointer">
-  <input
-    type="checkbox"
-    className="sr-only peer"
-    checked={viewAuctions}
-    onChange={() => setViewAuctions(!viewAuctions)}
-  />
-  <div
-    className="group peer bg-white rounded-full duration-300 w-16 h-8 ring-2 
-    ring-gray-500 after:duration-300 after:bg-gray-500 peer-checked:after:bg-green-500 
-    peer-checked:ring-green-500 after:rounded-full after:absolute after:h-6 after:w-6 
-    after:top-1 after:left-1 after:flex after:justify-center after:items-center 
-    peer-checked:after:translate-x-8 peer-hover:after:scale-95"
-  ></div>
-</label>
-<span
-  className={`ml-3 text-sm font-medium ${
-    viewAuctions ? "text-green-600" : "text-gray-600"
-  }`}
->
-  {viewAuctions ? "Showing Auction Products" : "Showing All Products"}
-</span>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center mb-6 gap-4">
+        {/* Switch for Auction/All Products */}
+        <div className="flex items-center">
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              className="sr-only peer"
+              checked={viewAuctions}
+              onChange={() => setViewAuctions(!viewAuctions)}
+            />
+            <div
+              className="group peer bg-white rounded-full duration-300 w-16 h-8 ring-2 
+              ring-gray-500 after:duration-300 after:bg-gray-500 peer-checked:after:bg-green-500 
+              peer-checked:ring-green-500 after:rounded-full after:absolute after:h-6 after:w-6 
+              after:top-1 after:left-1 after:flex after:justify-center after:items-center 
+              peer-checked:after:translate-x-8 peer-hover:after:scale-95"
+            ></div>
+          </label>
+          <span
+            className={`ml-3 text-sm font-medium ${
+              viewAuctions ? "text-green-600" : "text-gray-600"
+            }`}
+          >
+            {viewAuctions ? "Auction Products" : "All Products"}
+          </span>
+        </div>
 
+        {/* Filter Controls Container */}
+        <div className="flex flex-wrap gap-3 flex-1">
+          {/* Search Bar */}
+          <Input
+            placeholder="Search products..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full sm:w-auto sm:min-w-[240px] flex-grow"
+          />
 
-
-        {/* Search Bar */}
-        <Input
-          placeholder="Search products..."
-          value={searchTerm}
-          width="240px"
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="flex-grow"
-        />
-
-        {/* Filter by Category */}
-        {/* <Select onValueChange={setFilterCategory} value={filterCategory}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Filter Category" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="">All Categories</SelectItem>
-            {categories.map((category) => (
-              <SelectItem key={category} value={category}>
-                {category}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select> */}
+          {/* Filter by Category */}
+          <Select onValueChange={setFilterCategory} value={filterCategory}>
+            <SelectTrigger className="w-full sm:w-[180px]">
+              <SelectValue placeholder="Category" />
+            </SelectTrigger>
+            <SelectContent className="bg-white">
+              <SelectItem value="_all">All Categories</SelectItem>
+              {allCategories.map((category) => (
+                <SelectItem key={category} value={category}>
+                  {category}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
       {/* Loading and Error Handling */}
-      {loading && <div>Loading products...</div>}
-      {error && <div>Error: {error}</div>}
+      {loading && <div className="text-center py-8">Loading products...</div>}
+      {error && <div className="text-red-500 text-center py-8">Error: {error}</div>}
 
       {/* Product Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -182,6 +224,7 @@ const ProductList = () => {
             onDetails={() => handleProductDetails(product)}
             onPlaceBid={() => handleBid(product)}
             onPlaceOrder={() => handlePlaceOrder(product)}
+            disabled={isOrderProcessing}
           />
         ))}
       </div>
@@ -191,12 +234,14 @@ const ProductList = () => {
         <ProductDetail
           product={selectedProduct}
           onClose={() => setSelectedProduct(null)}
+          onPlaceOrder={handlePlaceOrder}
+          isProcessing={isOrderProcessing}
         />
       )}
 
       {/* No Products Found */}
       {filteredProducts.length === 0 && !loading && (
-        <div className="text-center text-gray-500 mt-10">{t("noProductsFound")}</div>
+        <div className="text-center text-gray-500 mt-10 py-8">{t("noProductsFound")}</div>
       )}
     </div>
   );
