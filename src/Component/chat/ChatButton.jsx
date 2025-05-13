@@ -15,8 +15,7 @@ function ChatButton({ currentUserId, sellerId, sellerName, productId, productNam
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [chatId, setChatId] = useState(null);
   const [username,setUsername] = useState("")
-console.log("cuurent user",currentUserId);
-console.log("Seller name",sellerName);
+
 
 const fetchAndStoreUsername = async (userId) => {
 
